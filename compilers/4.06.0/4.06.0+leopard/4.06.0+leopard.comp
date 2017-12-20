@@ -1,0 +1,23 @@
+opam-version: "1"
+version: "4.06.0"
+src: "https://github.com/camlspotter/ocaml/archive/4.06.0+leopard.tar.gz"
+build: [
+  ["./configure"
+    "-prefix" prefix "-with-debug-runtime"
+  ] { os != "openbsd" & os  != "freebsd" & os  != "darwin" }
+  ["./configure"
+    "-prefix" prefix "-with-debug-runtime"
+    "-cc" "cc -O2 -pipe"
+    "-aspp" "cc -O2 -pipe -c"
+  ] { os  = "openbsd" | os  = "freebsd" | os  = "darwin" }
+  [make "core" "coreboot"]
+  [make "world.opt" "ocamlnat"]
+  [make "-C" "leopardlib"]
+  [make "-C" "leopardlib" opt] {ocaml-native}
+]
+packages: [
+  "base-unix"
+  "base-bigarray"
+  "base-threads"
+]
+env: [[CAML_LD_LIBRARY_PATH = "%{lib}%/stublibs"]]
