@@ -15,6 +15,9 @@ build: [
   [make "-C" "leopardlib"]
   [make "-C" "leopardlib" opt] {ocaml-native}
 ]
+install: [
+  [make install]
+]
 packages: [
   "base-unix"
   "base-bigarray"
