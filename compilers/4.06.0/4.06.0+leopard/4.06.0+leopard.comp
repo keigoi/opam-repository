@@ -14,9 +14,7 @@ build: [
   [make "world.opt" "ocamlnat"]
   [make "-C" "leopardlib"]
   [make "-C" "leopardlib" opt] {ocaml-native}
-]
-install: [
-  [make install]
+  [make "install"]
 ]
 packages: [
   "base-unix"
